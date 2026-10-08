@@ -7,12 +7,15 @@ def winner(names,scores):
             max=scores[i]
     return names[maxr]
 def average(scores):
-    psp=0.0
-    sr=0
-    count=0
-    for k in range(len(scores)):
-        sr=scores[k]+sr
-    return round(sr/len(scores),2)
+    if scores==[]:
+        return 0.0
+    else:
+        psp=0.0
+        sr=0
+        count=0
+        for k in range(len(scores)):
+            sr=scores[k]+sr
+        return round(sr/len(scores),2)
 def ranking(names,scores):
     lt=[]
     sortsc=sorted(scores,reverse=True)
