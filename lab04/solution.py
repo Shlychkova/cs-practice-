@@ -21,10 +21,15 @@ def ranking(names,scores):
             if (sortsc[i]==scores[j])and (names[j] not in lt):
                 lt.append(names[j])
     return lt
-
+def above_average(names,scores):
+    l=[]
+    for i in range(len(scores)):
+        if scores[i]>average(scores):
+            l.append(names[i])
+    return l
 names =  ["Аня", "Боря", "Вика"]
 scores = [7.0,   9.0,    9.0]
 print(winner(names,scores))
 print(average(scores))
 print(ranking(names,scores))
-#print(above_average(names,scores))
+print(above_average(names,scores))
