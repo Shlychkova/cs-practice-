@@ -1,4 +1,4 @@
-def read_rows(lines):
+def read_rows(lines: list[str]) -> list[dict]:
     rows = []
     header = []
 
@@ -6,45 +6,48 @@ def read_rows(lines):
         line = line.strip()
         if not line:
             continue
-        parts = [part.strip() for part in line.split(',')]
-        if not header:
-            header = parts
-            continue
-        if len(parts) != len(header):
-            continue
-        row_dict = {}
-        for i in range(len(header)):
-            row_dict[header[i]] = parts[i]
 
-        rows.append(row_dict)
+        values = line.split(",")
+        for i in range(len(values)):
+            values[i] = values[i].strip()
+def read_rows(lines: list[str]) -> list[dict]:
+    rows = []
+    header = []
+
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+
+        values = line.split(",")
+        for i in range(len(values)):
+            values[i] = values[i].strip()
+
+        if not header:
+            header = values
+            continue
+
+        if len(values) != len(header):
+            continue
+
+        row = {}
+        for i in range(len(header)):
+            row[header[i]] = values[i]
+        rows.append(row)
 
     return rows
 
-def count_types(rows):
+
+def count_types(rows: list[dict]) -> dict:
     counts = {}
+
     for row in rows:
-        kind = row.get("тип")
-        if kind:
-            counts[kind] = counts.get(kind, 0) + 1
+        kind = row["тип"]
+        if kind not in counts:
+            counts[kind] = 0
+        counts[kind] += 1
+
     return counts
-
-def total_minutes(rows):
-    total = 0.0
-    found = False
-
-    for row in rows:
-        if row.get("тип") == kind:
-            found = True
-            minutes_str = row.get("минуты", "")
-            try:
-                minutes_val = float(minutes_str.replace(',', '.'))
-                total += minutes_val
-            except (ValueError, TypeError):
-                continue
-    if not found:
-        return 0.0
-
-    return round(total, 1)
 
 
 def total_minutes(rows: list[dict], kind: str) -> float:
@@ -69,4 +72,52 @@ def to_csv(counts: dict) -> str:
         result += f"{kind},{counts[kind]}\n"
 
     return result
+        if not header:
+            header = values
+            continue
 
+        if len(values) != len(header):
+            continue
+
+        row = {}
+        for i in range(len(header)):
+            row[header[i]] = values[i]
+        rows.append(row)
+
+    return rows
+
+
+def count_types(rows: list[dict]) -> dict:
+    counts = {}
+
+    for row in rows:
+        kind = row["тип"]
+        if kind not in counts:
+            counts[kind] = 0
+        counts[kind] += 1
+
+    return counts
+
+
+def total_minutes(rows: list[dict], kind: str) -> float:
+    total = 0.0
+
+    for row in rows:
+        if row["тип"] != kind:
+            continue
+
+        try:
+            total += float(row["минуты"].replace(",", "."))
+        except ValueError:
+            continue
+
+    return round(total, 1)
+
+
+def to_csv(counts: dict) -> str:
+    result = "тип,количество\n"
+
+    for kind in sorted(counts):
+        result += f"{kind},{counts[kind]}\n"
+
+    return result
