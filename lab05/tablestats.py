@@ -28,7 +28,6 @@ def count_types(rows):
             counts[kind] = counts.get(kind, 0) + 1
     return counts
 
-<<<<<<< HEAD
 def total_minutes(rows):
     total = 0.0
     found = False
@@ -47,13 +46,6 @@ def total_minutes(rows):
 
     return round(total, 1)
 
-def to_csv(counts):
-    lines = ["тип,количество"]
-    for kind in sorted(counts.keys()):
-        lines.append(f"{kind},{counts[kind]}")
-
-    return "\n".join(lines) + "/n"
-=======
 
 def total_minutes(rows: list[dict], kind: str) -> float:
     total = 0.0
@@ -77,4 +69,4 @@ def to_csv(counts: dict) -> str:
         result += f"{kind},{counts[kind]}\n"
 
     return result
->>>>>>> 040a69c0d31c5a1164b3fe2cacaabd728653eb1c
+
