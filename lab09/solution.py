@@ -9,7 +9,7 @@ def vector_report(values: list[float]) -> dict:
 def change_vector(values: list[float]) -> list[float]:
     arr=np.asarray(values,dtype=float).copy()
     arr[2:5]=99
-    arr[1::2]=-1
+    arr[::2]=-1
     return arr.tolist()
 def cap_above(values: list[float], limit: float) -> list[float]:
     arr=np.asarray(values,dtype=float).copy()
