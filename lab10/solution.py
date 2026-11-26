@@ -20,7 +20,7 @@ def transpose_matrix(matrix: list[list[float]]) -> list[list[float]]:
     return np.array(matrix).T.tolist()
 
 def solve_system(matrix: list[list[float]], vector: list[float]) -> list[float]:
-    return np.linalg.solve(np.asarray(matrix),np.array(vector)) np.round(res,6).tolist()
+    return np.linalg.solve(np.asarray(matrix),np.array(vector)).tolist()
 
 def tensor_channel_mean(tensor: list) -> list:
     arr=np.array(tensor)
