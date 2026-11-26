@@ -20,14 +20,13 @@ def transpose_matrix(matrix: list[list[float]]) -> list[list[float]]:
     return np.array(matrix).T.tolist()
 
 def solve_system(matrix: list[list[float]], vector: list[float]) -> list[float]:
-    res=np.linalng.solve(np.array(matrix),np.array(vector))
-    return np.round(res,6).tolist()
+    return np.linalg.solve(np.asarray(matrix),np.array(vector)) np.round(res,6).tolist()
 
 def tensor_channel_mean(tensor: list) -> list:
     arr=np.array(tensor)
     return np.mean(arr,axis=-1).tolist()
 def point_distance(first: list[float], second: list[float]) -> float:
-    vec1=np.array(first)
-    vec2=np.array(second)
-    dist=np.linalng.norm(vec1-vec2)
+    vec1=np.asarray(first)
+    vec2=np.asarray(second)
+    dist=np.linalg.norm(vec1-vec2)
     return float(np.round(dist,6))
